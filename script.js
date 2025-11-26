@@ -121,6 +121,10 @@ document.getElementById('contactForm').addEventListener('submit', async function
             `Interest in Flying:\n${formData.interest}`
         );
 
+        console.log('=== FORM SUBMISSION DEBUG ===');
+        console.log('Attempting to send to: dr.jzhao@zsx.ai');
+        console.log('Form data:', formData);
+
         // Try to send via FormSubmit.co (free form backend service)
         const response = await fetch('https://formsubmit.co/dr.jzhao@zsx.ai', {
             method: 'POST',
@@ -138,30 +142,42 @@ document.getElementById('contactForm').addEventListener('submit', async function
             })
         });
 
+        console.log('Response status:', response.status);
+        console.log('Response ok:', response.ok);
+
+        const responseData = await response.json();
+        console.log('Response data:', responseData);
+
         if (response.ok) {
-            formMessage.textContent = 'Thank you! Your message has been sent successfully. I\'ll get back to you soon!';
+            formMessage.innerHTML = `<strong>✓ Success!</strong><br>Your message has been sent to dr.jzhao@zsx.ai<br>Status: ${response.status}`;
             formMessage.className = 'form-message success';
             this.reset();
         } else {
-            throw new Error('Form submission failed');
+            formMessage.innerHTML = `<strong>⚠ Error ${response.status}</strong><br>${responseData.message || 'Form submission failed'}<br>Check browser console (F12) for details`;
+            formMessage.className = 'form-message error';
+            console.error('Form submission error:', responseData);
         }
     } catch (error) {
-        // Fallback to mailto link
-        console.log('Using mailto fallback');
-        const mailtoLink = `mailto:dr.jzhao@zsx.ai?subject=${subject}&body=${body}`;
-        window.location.href = mailtoLink;
+        console.error('Form submission exception:', error);
 
-        formMessage.textContent = 'Opening your email client... If it doesn\'t open automatically, please email dr.jzhao@zsx.ai';
-        formMessage.className = 'form-message success';
+        // Fallback to mailto link
+        const mailtoLink = `mailto:dr.jzhao@zsx.ai?subject=${subject}&body=${body}`;
+
+        formMessage.innerHTML = `<strong>⚠ Network Error</strong><br>Using email fallback. Error: ${error.message}<br>Check browser console (F12) for details`;
+        formMessage.className = 'form-message error';
+
+        // Don't redirect immediately, let user see the error
+        console.log('Mailto fallback link:', mailtoLink);
+        console.log('You can manually open your email client with the link above');
     } finally {
         // Re-enable submit button
         submitButton.disabled = false;
         submitButton.textContent = 'Send Message';
 
-        // Hide message after 5 seconds
+        // Keep message visible longer for debugging
         setTimeout(() => {
             formMessage.style.display = 'none';
-        }, 5000);
+        }, 10000);
     }
 });
 
