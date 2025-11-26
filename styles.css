@@ -363,17 +363,10 @@ img, video {
     opacity: 0;
     transition: opacity 1s ease-in-out;
     background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sky-blue) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .slide.active {
     opacity: 1;
-}
-
-.slide {
-    position: relative;
 }
 
 .slide::after {
@@ -396,6 +389,7 @@ img, video {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1;
 }
 
 .slide-caption {

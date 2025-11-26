@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Test</title>
+    <style>
+        img {
+            max-width: 400px;
+            margin: 20px;
+            border: 2px solid red;
+        }
+        .loaded { border-color: green; }
+    </style>
+</head>
+<body>
+    <h1>Image Loading Test</h1>
+
+    <h2>Flight 1</h2>
+    <img src="images/flight1.jpg" onload="this.classList.add('loaded'); console.log('flight1 loaded')" onerror="console.error('flight1 failed')">
+
+    <h2>Flight 2</h2>
+    <img src="images/flight2.jpg" onload="this.classList.add('loaded'); console.log('flight2 loaded')" onerror="console.error('flight2 failed')">
+
+    <h2>Flight 3</h2>
+    <img src="images/flight3.jpg" onload="this.classList.add('loaded'); console.log('flight3 loaded')" onerror="console.error('flight3 failed')">
+
+    <h2>Flight 4</h2>
+    <img src="images/flight4.jpg" onload="this.classList.add('loaded'); console.log('flight4 loaded')" onerror="console.error('flight4 failed')">
+
+    <h2>Video Test</h2>
+    <video controls width="400">
+        <source src="videos/areo-1.mp4" type="video/mp4">
+    </video>
+</body>
+</html>
