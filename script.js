@@ -122,7 +122,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
         );
 
         // Try to send via FormSubmit.co (free form backend service)
-        const response = await fetch('https://formsubmit.co/contact@zsx.ai', {
+        const response = await fetch('https://formsubmit.co/dr.jzhao@zsx.ai', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -148,10 +148,10 @@ document.getElementById('contactForm').addEventListener('submit', async function
     } catch (error) {
         // Fallback to mailto link
         console.log('Using mailto fallback');
-        const mailtoLink = `mailto:contact@zsx.ai?subject=${subject}&body=${body}`;
+        const mailtoLink = `mailto:dr.jzhao@zsx.ai?subject=${subject}&body=${body}`;
         window.location.href = mailtoLink;
 
-        formMessage.textContent = 'Opening your email client... If it doesn\'t open automatically, please email contact@zsx.ai';
+        formMessage.textContent = 'Opening your email client... If it doesn\'t open automatically, please email dr.jzhao@zsx.ai';
         formMessage.className = 'form-message success';
     } finally {
         // Re-enable submit button
