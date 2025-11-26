@@ -29,6 +29,29 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
     overflow-x: hidden;
+    /* Disable text selection */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Allow selection in form inputs */
+input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Prevent image dragging */
+img, video {
+    pointer-events: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
 }
 
 .container {
@@ -349,6 +372,23 @@ body {
 
 .slide.active {
     opacity: 1;
+}
+
+.slide {
+    position: relative;
+}
+
+.slide::after {
+    content: '© ZSX Aviation';
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    z-index: 2;
+    pointer-events: none;
 }
 
 .slide img {

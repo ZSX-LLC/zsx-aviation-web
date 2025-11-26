@@ -1,4 +1,29 @@
 // ========================================
+// Content Protection
+// ========================================
+// Disable right-click
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+});
+
+// Disable common keyboard shortcuts for downloading/saving
+document.addEventListener('keydown', function(e) {
+    // Disable Ctrl+S (Save), Ctrl+U (View Source), F12 (DevTools), Ctrl+Shift+I (Inspect)
+    if ((e.ctrlKey && (e.key === 's' || e.key === 'u')) ||
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Disable text selection via JavaScript (backup)
+document.onselectstart = function() {
+    return false;
+};
+
+// ========================================
 // Smooth Scrolling for Navigation Links
 // ========================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
