@@ -151,10 +151,10 @@ img, video {
 
 .hero-video {
     position: absolute;
-    top: 10%;
-    left: 10%;
-    width: 80%;
-    height: 80%;
+    top: 2.5%;
+    left: 2.5%;
+    width: 95%;
+    height: 95%;
     object-fit: cover;
     filter: blur(8px);
     z-index: 0;
