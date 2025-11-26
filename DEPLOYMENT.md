@@ -1,7 +1,123 @@
-# Deploying Your ZSX Aviation Website to GoDaddy
+# Deploying Your ZSX Aviation Website
+
+## ✅ Current Deployment Method: GitHub Pages (FREE)
+
+Your website is currently deployed using **GitHub Pages** - a free hosting service from GitHub. This section documents the setup process and how to manage your site.
+
+### Repository Information
+- **Repository**: https://github.com/ZSX-LLC/zsx-aviation-web
+- **Branch**: main
+- **Custom Domain**: zsx.ai
+- **Hosting**: GitHub Pages (Free)
+
+---
+
+## GitHub Pages Deployment (Current Setup)
+
+### Prerequisites
+- GitHub account (ZSX-LLC organization)
+- Domain zsx.ai configured in GoDaddy
+- Git installed on your computer
+
+### Initial Setup (Already Completed)
+
+#### 1. Create Git Repository
+```bash
+cd /path/to/zsx-cfi
+git init
+git add index.html styles.css script.js DEPLOYMENT.md logo/ images/
+git commit -m "Initial commit: ZSX Aviation website"
+```
+
+#### 2. Connect to GitHub
+```bash
+git remote add origin https://github.com/ZSX-LLC/zsx-aviation-web.git
+git branch -M main
+git push -u origin main
+```
+
+#### 3. Enable GitHub Pages
+1. Go to repository: https://github.com/ZSX-LLC/zsx-aviation-web
+2. Click **Settings** → **Pages**
+3. Under "Source", select **"Deploy from a branch"**
+4. Under "Branch", select **"main"** and **"/ (root)"**
+5. Click **Save**
+
+#### 4. Configure Custom Domain
+Created `CNAME` file with content: `zsx.ai`
+
+#### 5. Configure GoDaddy DNS Settings
+In GoDaddy DNS management for zsx.ai, set up:
+
+**A Records (4 records pointing to GitHub Pages):**
+| Type | Name | Value | TTL |
+|------|------|-------|-----|
+| A | @ | 185.199.108.153 | 600 |
+| A | @ | 185.199.109.153 | 600 |
+| A | @ | 185.199.110.153 | 600 |
+| A | @ | 185.199.111.153 | 600 |
+
+**CNAME Record (for www subdomain):**
+| Type | Name | Value | TTL |
+|------|------|-------|-----|
+| CNAME | www | zsx-llc.github.io | 600 |
+
+**Note:** DNS propagation takes 5-30 minutes. SSL certificate generation takes 10-30 minutes after DNS propagates.
+
+### Updating Your Website
+
+To update your website content:
+
+```bash
+# Navigate to your project directory
+cd /path/to/zsx-cfi
+
+# Make your changes to files (index.html, styles.css, etc.)
+
+# Add and commit changes
+git add .
+git commit -m "Description of your changes"
+
+# Push to GitHub (automatically deploys)
+git push
+```
+
+GitHub Pages will automatically rebuild and deploy your site within 1-2 minutes.
+
+### Testing Mode Toggle
+
+The contact form has a testing mode. To toggle:
+
+**In `script.js` line 66:**
+- `const TESTING_MODE = true;` - Shows form data in console, doesn't send emails
+- `const TESTING_MODE = false;` - Sends real emails via FormSubmit.co
+
+Currently set to: `false` (production mode)
+
+### Troubleshooting
+
+**SSL Certificate Errors:**
+- If you see "ERR_CERT_COMMON_NAME_INVALID", wait 10-30 minutes for certificate generation
+- GitHub automatically issues Let's Encrypt SSL certificates for custom domains
+- Check GitHub Settings → Pages to see certificate status
+
+**Site Not Updating:**
+- Clear browser cache (Cmd+Shift+R on Mac, Ctrl+Shift+R on Windows)
+- Check GitHub Actions tab for build status
+- Wait 1-2 minutes after pushing for deployment
+
+**DNS Issues:**
+- Verify DNS records in GoDaddy match exactly as shown above
+- Use `dig zsx.ai` or https://dnschecker.org to verify DNS propagation
+
+---
+
+## Alternative: GoDaddy Hosting (Not Currently Used)
+
+**Note:** This section is kept for reference. Your site is NOT currently using GoDaddy hosting, only the domain registration.
 
 ## Prerequisites
-- GoDaddy account with hosting plan
+- GoDaddy account with hosting plan (requires purchase)
 - Domain zsx.ai configured in GoDaddy
 - FTP credentials from GoDaddy
 
