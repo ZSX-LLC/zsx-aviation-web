@@ -35,9 +35,10 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <video autoplay muted loop playsinline class="hero-video">
+        <!-- Video temporarily disabled - uncomment to enable -->
+        <!-- <video autoplay muted loop playsinline class="hero-video">
             <source src="videos/areo-1.mp4" type="video/mp4">
-        </video>
+        </video> -->
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-title">Your Journey to the Skies Starts Here</h1>
@@ -106,15 +107,15 @@
                         <div class="slide-caption">Professional Flight Training</div>
                     </div>
                     <div class="slide">
-                        <img src="images/flight2.jpg" alt="Cockpit View" onerror="this.style.display='none'; this.nextElementSibling.style.padding='200px 20px'; this.nextElementSibling.innerHTML='<strong>Add your aircraft photos!</strong><br>Upload flight2.jpg to the images folder';">
+                        <img src="images/flight2.jpg" alt="Cockpit View" onload="console.log('flight2 loaded')" onerror="console.error('flight2 failed to load'); this.style.display='none'; this.nextElementSibling.style.padding='200px 20px'; this.nextElementSibling.innerHTML='<strong>Image failed to load</strong><br>flight2.jpg';">
                         <div class="slide-caption">Modern Training Aircraft</div>
                     </div>
                     <div class="slide">
-                        <img src="images/flight3.jpg" alt="Scenic Flight" onerror="this.style.display='none'; this.nextElementSibling.style.padding='200px 20px'; this.nextElementSibling.innerHTML='<strong>Add scenic flight photos!</strong><br>Upload flight3.jpg to the images folder';">
+                        <img src="images/flight3.jpg" alt="Scenic Flight" onload="console.log('flight3 loaded')" onerror="console.error('flight3 failed to load'); this.style.display='none'; this.nextElementSibling.style.padding='200px 20px'; this.nextElementSibling.innerHTML='<strong>Image failed to load</strong><br>flight3.jpg';">
                         <div class="slide-caption">Beautiful Flying Conditions</div>
                     </div>
                     <div class="slide">
-                        <img src="images/flight4.jpg" alt="Student Success" onerror="this.style.display='none'; this.nextElementSibling.style.padding='200px 20px'; this.nextElementSibling.innerHTML='<strong>Add aviation photos!</strong><br>Upload flight4.jpg to the images folder';">
+                        <img src="images/flight4.jpg" alt="Student Success" onload="console.log('flight4 loaded')" onerror="console.error('flight4 failed to load'); this.style.display='none'; this.nextElementSibling.style.padding='200px 20px'; this.nextElementSibling.innerHTML='<strong>Image failed to load</strong><br>flight4.jpg';">
                         <div class="slide-caption">Your Aviation Dreams Await</div>
                     </div>
                 </div>
