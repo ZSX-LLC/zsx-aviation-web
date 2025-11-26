@@ -145,30 +145,45 @@ document.getElementById('contactForm').addEventListener('submit', async function
         console.log('Response status:', response.status);
         console.log('Response ok:', response.ok);
 
-        const responseData = await response.json();
-        console.log('Response data:', responseData);
+        // Check if response is JSON or HTML
+        const contentType = response.headers.get('content-type');
+        console.log('Content-Type:', contentType);
 
         if (response.ok) {
-            formMessage.innerHTML = `<strong>✓ Success!</strong><br>Your message has been sent to dr.jzhao@zsx.ai<br>Status: ${response.status}`;
+            // Try to parse JSON, but handle HTML responses too
+            let responseData;
+            try {
+                responseData = await response.json();
+                console.log('Response data:', responseData);
+            } catch (jsonError) {
+                // Not JSON - likely HTML verification page
+                const htmlText = await response.text();
+                console.log('HTML Response (verification needed):', htmlText.substring(0, 200));
+
+                formMessage.innerHTML = `<strong>✓ Email Verification Required!</strong><br>
+                    FormSubmit sent a verification email to <strong>dr.jzhao@zsx.ai</strong><br>
+                    Please check your inbox and click the verification link.<br>
+                    After verification, the form will work automatically.`;
+                formMessage.className = 'form-message success';
+                this.reset();
+                return;
+            }
+
+            formMessage.innerHTML = `<strong>✓ Success!</strong><br>Your message has been sent to dr.jzhao@zsx.ai`;
             formMessage.className = 'form-message success';
             this.reset();
         } else {
-            formMessage.innerHTML = `<strong>⚠ Error ${response.status}</strong><br>${responseData.message || 'Form submission failed'}<br>Check browser console (F12) for details`;
+            const responseData = await response.json();
+            formMessage.innerHTML = `<strong>⚠ Error ${response.status}</strong><br>${responseData.message || 'Form submission failed'}`;
             formMessage.className = 'form-message error';
             console.error('Form submission error:', responseData);
         }
     } catch (error) {
         console.error('Form submission exception:', error);
 
-        // Fallback to mailto link
-        const mailtoLink = `mailto:dr.jzhao@zsx.ai?subject=${subject}&body=${body}`;
-
-        formMessage.innerHTML = `<strong>⚠ Network Error</strong><br>Using email fallback. Error: ${error.message}<br>Check browser console (F12) for details`;
+        formMessage.innerHTML = `<strong>⚠ Error</strong><br>${error.message}<br>
+            Please email directly: <a href="mailto:dr.jzhao@zsx.ai" style="color: white; text-decoration: underline;">dr.jzhao@zsx.ai</a>`;
         formMessage.className = 'form-message error';
-
-        // Don't redirect immediately, let user see the error
-        console.log('Mailto fallback link:', mailtoLink);
-        console.log('You can manually open your email client with the link above');
     } finally {
         // Re-enable submit button
         submitButton.disabled = false;
