@@ -126,6 +126,20 @@ body {
     overflow: hidden;
 }
 
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    filter: blur(3px);
+    z-index: 0;
+}
+
 .hero::before {
     content: '';
     position: absolute;
@@ -135,6 +149,7 @@ body {
     bottom: 0;
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0 300 Q 300 200 600 300 T 1200 300" stroke="rgba(255,255,255,0.1)" fill="none" stroke-width="2"/><path d="M0 350 Q 300 250 600 350 T 1200 350" stroke="rgba(255,255,255,0.1)" fill="none" stroke-width="2"/></svg>');
     opacity: 0.3;
+    z-index: 1;
 }
 
 .hero-overlay {
@@ -143,12 +158,13 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at center, transparent 0%, rgba(0, 61, 92, 0.4) 100%);
+    background: radial-gradient(circle at center, rgba(0, 61, 92, 0.5) 0%, rgba(0, 61, 92, 0.7) 100%);
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     color: var(--white);
     max-width: 800px;
     padding: 0 20px;
