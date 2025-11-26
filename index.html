@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZSX Aviation - Your Journey to the Skies Starts Here</title>
+    <meta name="description" content="Professional FAA Certified Flight Instructor offering personalized flight training. Start your aviation journey with experienced instruction.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="logo/zsx_logo.png" alt="ZSX Aviation" class="logo">
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Your Journey to the Skies Starts Here</h1>
+            <p class="hero-subtitle">FAA Certified Flight Instructor - Personalized Training for Your Aviation Dreams</p>
+            <a href="#contact" class="cta-button">Start Flying Today</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Welcome to ZSX Aviation</h2>
+            <div class="about-content">
+                <div class="about-card">
+                    <div class="card-icon">✈️</div>
+                    <h3>Experienced Instruction</h3>
+                    <p>FAA Certified Flight Instructor with a passion for aviation and teaching. I provide personalized, safe, and professional flight training tailored to your goals.</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Flexible Training</h3>
+                    <p>Whether you're pursuing a private pilot license, instrument rating, or just want to experience the joy of flight, I'll create a customized training plan for you.</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-icon">🌟</div>
+                    <h3>Safety First</h3>
+                    <p>Safety is paramount in every lesson. Learn proper procedures, decision-making skills, and build confidence through comprehensive ground and flight instruction.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Training Services</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <h3>Private Pilot License</h3>
+                    <p>Begin your aviation journey with comprehensive private pilot training</p>
+                </div>
+                <div class="service-item">
+                    <h3>Instrument Rating</h3>
+                    <p>Advance your skills and fly with confidence in all weather conditions</p>
+                </div>
+                <div class="service-item">
+                    <h3>Flight Reviews</h3>
+                    <p>Stay current and sharp with biennial flight reviews</p>
+                </div>
+                <div class="service-item">
+                    <h3>Discovery Flights</h3>
+                    <p>Experience the thrill of flying with an introductory lesson</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Experience the Adventure</h2>
+            <div class="gallery-slider">
+                <div class="slider-container">
+                    <div class="slide active">
+                        <img src="images/flight1.jpg" alt="Flight Training Session" onerror="this.src='https://images.unsplash.com/photo-1583788811234-4ab1a83d8e54?w=800&q=80'">
+                        <div class="slide-caption">Professional Flight Training</div>
+                    </div>
+                    <div class="slide">
+                        <img src="images/flight2.jpg" alt="Cockpit View" onerror="this.src='https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=800&q=80'">
+                        <div class="slide-caption">Modern Training Aircraft</div>
+                    </div>
+                    <div class="slide">
+                        <img src="images/flight3.jpg" alt="Scenic Flight" onerror="this.src='https://images.unsplash.com/photo-1556388158-158ea5ccacbd?w=800&q=80'">
+                        <div class="slide-caption">Beautiful Flying Conditions</div>
+                    </div>
+                    <div class="slide">
+                        <img src="images/flight4.jpg" alt="Student Success" onerror="this.src='https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80'">
+                        <div class="slide-caption">Your Aviation Dreams Await</div>
+                    </div>
+                </div>
+                <button class="slider-btn prev" onclick="changeSlide(-1)">❮</button>
+                <button class="slider-btn next" onclick="changeSlide(1)">❯</button>
+                <div class="slider-dots">
+                    <span class="dot active" onclick="currentSlide(0)"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Ready to Start Your Aviation Journey?</h2>
+            <p class="contact-intro">Get in touch to schedule your first lesson or ask any questions about flight training.</p>
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="interest">Why are you interested in flying? *</label>
+                    <textarea id="interest" name="interest" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Send Message</button>
+                <div id="formMessage" class="form-message"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 ZSX Aviation. All rights reserved.</p>
+            <p>FAA Certified Flight Instructor</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
