@@ -122,11 +122,11 @@ document.getElementById('contactForm').addEventListener('submit', async function
         );
 
         console.log('=== FORM SUBMISSION DEBUG ===');
-        console.log('Attempting to send to: dr.jzhao@zsx.ai');
+        console.log('Attempting to send to: contact@zsx.ai');
         console.log('Form data:', formData);
 
         // Try to send via FormSubmit.co (free form backend service)
-        const response = await fetch('https://formsubmit.co/dr.jzhao@zsx.ai', {
+        const response = await fetch('https://formsubmit.co/contact@zsx.ai', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
                 responseData = JSON.parse(responseText);
                 console.log('Parsed JSON:', responseData);
 
-                formMessage.innerHTML = `<strong>✓ Success!</strong><br>Your message has been sent to dr.jzhao@zsx.ai`;
+                formMessage.innerHTML = `<strong>✓ Success!</strong><br>Your message has been sent to contact@zsx.ai`;
                 formMessage.className = 'form-message success';
                 this.reset();
             } catch (jsonError) {
@@ -168,7 +168,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
                 console.log('Not JSON - HTML verification page detected');
 
                 formMessage.innerHTML = `<strong>✓ Email Verification Required!</strong><br>
-                    FormSubmit sent a verification email to <strong>dr.jzhao@zsx.ai</strong><br>
+                    FormSubmit sent a verification email to <strong>contact@zsx.ai</strong><br>
                     Please check your inbox and click the verification link.<br>
                     After verification, the form will work automatically.`;
                 formMessage.className = 'form-message success';
@@ -191,7 +191,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
         console.error('Form submission exception:', error);
 
         formMessage.innerHTML = `<strong>⚠ Error</strong><br>${error.message}<br>
-            Please email directly: <a href="mailto:dr.jzhao@zsx.ai" style="color: white; text-decoration: underline;">dr.jzhao@zsx.ai</a>`;
+            Please email directly: <a href="mailto:contact@zsx.ai" style="color: white; text-decoration: underline;">contact@zsx.ai</a>`;
         formMessage.className = 'form-message error';
     } finally {
         // Re-enable submit button
