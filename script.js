@@ -99,8 +99,19 @@ document.addEventListener('DOMContentLoaded', function() {
 const USE_NATIVE_FORM = true;
 
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
-    // If using native form submission, let the form submit normally
+    // If using native form submission, show loading state then let it submit
     if (USE_NATIVE_FORM) {
+        const submitButton = this.querySelector('.submit-button');
+        const formMessage = document.getElementById('formMessage');
+
+        // Show loading state
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+
+        formMessage.innerHTML = `<strong>⏳ Sending your message...</strong><br>Please wait a moment.`;
+        formMessage.className = 'form-message success';
+        formMessage.style.display = 'block';
+
         // Form will submit to FormSubmit directly via action attribute
         return true;
     }
