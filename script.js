@@ -60,6 +60,39 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ========================================
+// Contact Form Submission Success Handler
+// ========================================
+// Check if user was redirected back after successful submission
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+        const formMessage = document.getElementById('formMessage');
+        const contactForm = document.getElementById('contactForm');
+
+        // Show success message
+        formMessage.innerHTML = `<strong>✓ Message Sent Successfully!</strong><br>
+            Your inquiry has been submitted to our office.<br>
+            We will contact you soon!`;
+        formMessage.className = 'form-message success';
+        formMessage.style.display = 'block';
+
+        // Reset the form
+        contactForm.reset();
+
+        // Scroll to the message
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Clean up URL (remove ?success=true)
+        window.history.replaceState({}, document.title, window.location.pathname);
+
+        // Hide message after 10 seconds
+        setTimeout(() => {
+            formMessage.style.display = 'none';
+        }, 10000);
+    }
+});
+
+// ========================================
 // Contact Form Submission
 // ========================================
 // Use native form submission for better FormSubmit compatibility
