@@ -62,10 +62,16 @@ document.addEventListener('DOMContentLoaded', () => {
 // ========================================
 // Contact Form Submission
 // ========================================
-// TESTING MODE: Set to true to see form data in console without sending
-const TESTING_MODE = false;
+// Use native form submission for better FormSubmit compatibility
+const USE_NATIVE_FORM = true;
 
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    // If using native form submission, let the form submit normally
+    if (USE_NATIVE_FORM) {
+        // Form will submit to FormSubmit directly via action attribute
+        return true;
+    }
+
     e.preventDefault();
 
     const formMessage = document.getElementById('formMessage');

@@ -132,7 +132,7 @@
         <div class="container">
             <h2 class="section-title">Ready to Start Your Aviation Journey?</h2>
             <p class="contact-intro">Get in touch to schedule your first lesson or ask any questions about flight training.</p>
-            <form class="contact-form" id="contactForm">
+            <form class="contact-form" id="contactForm" action="https://formsubmit.co/contact@zsx.ai" method="POST">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="name">Name *</label>
@@ -151,6 +151,13 @@
                     <label for="interest">Why are you interested in flying? *</label>
                     <textarea id="interest" name="interest" rows="5" required></textarea>
                 </div>
+
+                <!-- FormSubmit Configuration -->
+                <input type="hidden" name="_subject" value="New Flight Training Inquiry from ZSX.ai">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="text" name="_honey" style="display:none">
+
                 <button type="submit" class="submit-button">Send Message</button>
                 <div id="formMessage" class="form-message"></div>
             </form>
@@ -165,6 +172,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=4"></script>
+    <script src="script.js?v=5"></script>
 </body>
 </html>
