@@ -149,20 +149,6 @@ img, video {
     overflow: hidden;
 }
 
-.hero-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
-    filter: blur(3px);
-    z-index: 0;
-}
-
 .hero::before {
     content: '';
     position: absolute;
@@ -231,8 +217,40 @@ img, video {
    About Section
    ======================================== */
 .about {
+    position: relative;
     padding: var(--section-padding);
     background: var(--white);
+    overflow: hidden;
+}
+
+.about-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 120%;
+    min-height: 120%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%) scale(1.2);
+    object-fit: cover;
+    filter: blur(8px);
+    z-index: 0;
+    opacity: 0.6;
+}
+
+.about-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.85);
+    z-index: 1;
+}
+
+.about .container {
+    position: relative;
+    z-index: 2;
 }
 
 .section-title {
