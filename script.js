@@ -150,15 +150,22 @@ document.getElementById('contactForm').addEventListener('submit', async function
         console.log('Content-Type:', contentType);
 
         if (response.ok) {
-            // Try to parse JSON, but handle HTML responses too
+            // Get response text first (can only read body once)
+            const responseText = await response.text();
+            console.log('Response text (first 200 chars):', responseText.substring(0, 200));
+
+            // Try to parse as JSON
             let responseData;
             try {
-                responseData = await response.json();
-                console.log('Response data:', responseData);
+                responseData = JSON.parse(responseText);
+                console.log('Parsed JSON:', responseData);
+
+                formMessage.innerHTML = `<strong>✓ Success!</strong><br>Your message has been sent to dr.jzhao@zsx.ai`;
+                formMessage.className = 'form-message success';
+                this.reset();
             } catch (jsonError) {
                 // Not JSON - likely HTML verification page
-                const htmlText = await response.text();
-                console.log('HTML Response (verification needed):', htmlText.substring(0, 200));
+                console.log('Not JSON - HTML verification page detected');
 
                 formMessage.innerHTML = `<strong>✓ Email Verification Required!</strong><br>
                     FormSubmit sent a verification email to <strong>dr.jzhao@zsx.ai</strong><br>
@@ -166,17 +173,19 @@ document.getElementById('contactForm').addEventListener('submit', async function
                     After verification, the form will work automatically.`;
                 formMessage.className = 'form-message success';
                 this.reset();
-                return;
             }
-
-            formMessage.innerHTML = `<strong>✓ Success!</strong><br>Your message has been sent to dr.jzhao@zsx.ai`;
-            formMessage.className = 'form-message success';
-            this.reset();
         } else {
-            const responseData = await response.json();
-            formMessage.innerHTML = `<strong>⚠ Error ${response.status}</strong><br>${responseData.message || 'Form submission failed'}`;
+            const responseText = await response.text();
+            let errorMessage = 'Form submission failed';
+            try {
+                const responseData = JSON.parse(responseText);
+                errorMessage = responseData.message || errorMessage;
+            } catch (e) {
+                errorMessage = responseText.substring(0, 100);
+            }
+            formMessage.innerHTML = `<strong>⚠ Error ${response.status}</strong><br>${errorMessage}`;
             formMessage.className = 'form-message error';
-            console.error('Form submission error:', responseData);
+            console.error('Form submission error:', responseText);
         }
     } catch (error) {
         console.error('Form submission exception:', error);
