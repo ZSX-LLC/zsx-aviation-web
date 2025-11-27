@@ -9,6 +9,7 @@ Your website is currently deployed using **GitHub Pages** - a free hosting servi
 - **Branch**: main
 - **Custom Domain**: zsx.ai
 - **Hosting**: GitHub Pages (Free)
+- **Live Site**: https://zsx.ai
 
 ---
 
@@ -25,7 +26,7 @@ Your website is currently deployed using **GitHub Pages** - a free hosting servi
 ```bash
 cd /path/to/zsx-cfi
 git init
-git add index.html styles.css script.js DEPLOYMENT.md logo/ images/
+git add index.html styles.css script.js DEPLOYMENT.md logo/ images/ videos/ thank-you.html
 git commit -m "Initial commit: ZSX Aviation website"
 ```
 
@@ -84,15 +85,37 @@ git push
 
 GitHub Pages will automatically rebuild and deploy your site within 1-2 minutes.
 
-### Testing Mode Toggle
+### Contact Form Configuration
 
-The contact form has a testing mode. To toggle:
+The contact form uses **FormSubmit.co** for email handling with the following setup:
 
-**In `script.js` line 66:**
-- `const TESTING_MODE = true;` - Shows form data in console, doesn't send emails
-- `const TESTING_MODE = false;` - Sends real emails via FormSubmit.co
+**Current Settings (in `index.html`):**
+- **Recipient**: contact@zsx.ai
+- **Thank You Page**: https://zsx.ai/thank-you.html (custom page on your domain)
+- **Autoresponse**: Enabled - users receive confirmation email after submission
+- **Form Mode**: Native HTML form submission (in `script.js` line 124: `USE_NATIVE_FORM = true`)
 
-Currently set to: `false` (production mode)
+**Features:**
+- Users see loading state ("Sending...") when submitting
+- After submission, redirects to custom thank you page with reminder to check junk folder
+- Users receive autoresponse email: "Thank you for your inquiry! Your message has been sent to our admin office. We will contact you soon."
+- Form data sent to contact@zsx.ai in table format
+
+### Local Development and Testing
+
+**Running a Local Server:**
+```bash
+cd /path/to/zsx-cfi
+python3 -m http.server 8000
+```
+Then open http://localhost:8000 in your browser to test changes before deploying.
+
+**Common Issues Found and Fixed:**
+1. **Gallery images not displaying**: Fixed duplicate `.slide` CSS rule (position: absolute vs relative conflict)
+2. **Images have no z-index**: Added `z-index: 1` to `.slide img` to ensure images display above background
+3. **Video commented out**: Ensure video element is uncommented in index.html
+4. **File attributes blocking media**: Run `xattr -cr images/ videos/` to remove macOS extended attributes that may block files
+5. **FormSubmit verification emails in junk**: Check spam/junk folder for verification emails from FormSubmit
 
 ### Troubleshooting
 
@@ -109,6 +132,18 @@ Currently set to: `false` (production mode)
 **DNS Issues:**
 - Verify DNS records in GoDaddy match exactly as shown above
 - Use `dig zsx.ai` or https://dnschecker.org to verify DNS propagation
+
+**Gallery Images Not Showing:**
+- Verify images are committed: `git ls-files images/`
+- Check for CSS conflicts: ensure only one `.slide` CSS rule exists
+- Verify images have z-index: `.slide img` should have `z-index: 1`
+- Test locally first using `python3 -m http.server 8000`
+
+**Video Not Playing:**
+- Check video is not commented out in HTML
+- Verify video file exists: `ls -lh videos/`
+- Check browser console for errors
+- Ensure video has correct path: `videos/areo-1.mp4`
 
 ---
 
@@ -127,13 +162,19 @@ Your website consists of these files:
 ```
 zsx-cfi/
 ├── index.html          (Main webpage)
+├── thank-you.html      (Post-submission thank you page)
 ├── styles.css          (Styling and colors)
 ├── script.js           (Interactive features)
-└── images/             (Your flight photos)
-    ├── flight1.jpg
-    ├── flight2.jpg
-    ├── flight3.jpg
-    └── flight4.jpg
+├── DEPLOYMENT.md       (This file)
+├── logo/               (Company logo)
+│   └── zsx_logo.png
+├── images/             (Flight photos - 4 images)
+│   ├── flight1.jpg
+│   ├── flight2.jpg
+│   ├── flight3.jpg
+│   └── flight4.jpg
+└── videos/             (Background video)
+    └── areo-1.mp4      (Hero section video, 95% coverage with 8px blur)
 ```
 
 ## Deployment Steps
@@ -226,24 +267,26 @@ If you want a simpler solution without FTP:
    - Install a free SSL certificate for zsx.ai
    - This makes your site secure (https://zsx.ai)
 
-## Contact Form Setup
+## Contact Form Setup (FormSubmit.co)
 
-The contact form uses FormSubmit.co as a free email service. To activate it:
+The contact form uses FormSubmit.co as a free email service.
 
-1. **First Submission Verification**
-   - When you first visit your site at https://zsx.ai
-   - Fill out the contact form and submit
-   - FormSubmit will send a verification email to contact@zsx.ai
-   - Click the verification link in that email
+**Current Configuration:**
+- **Email recipient**: contact@zsx.ai
+- **Thank you redirect**: https://zsx.ai/thank-you.html (custom page with 15s auto-redirect)
+- **Autoresponse**: Enabled (users receive confirmation email)
+- **Status**: ✅ Already verified and working
 
-2. **Set Up contact@zsx.ai Email**
-   - In GoDaddy, go to "Email & Office"
-   - Create email address: contact@zsx.ai
-   - Set it to forward to your personal email if needed
+**Setup Steps (Already Completed):**
+1. Form configured in `index.html` with action="https://formsubmit.co/contact@zsx.ai"
+2. Verification email sent to contact@zsx.ai and confirmed
+3. Custom thank you page created at thank-you.html
+4. Autoresponse message configured
 
-3. **Alternative: Use Direct Mailto**
-   - If FormSubmit doesn't work, the form falls back to opening the user's email client
-   - This is already built into the code
+**Important Notes:**
+- FormSubmit verification emails often go to junk/spam folder - remind users to check
+- First-time setup requires clicking verification link in email
+- Do NOT add `_captcha=false` parameter as it disables autoresponse feature
 
 ## Testing Your Website
 
@@ -292,15 +335,33 @@ After deployment, you can customize:
 - **File Manager Help**: https://www.godaddy.com/help/file-manager-2319
 - **FTP Help**: https://www.godaddy.com/help/ftp-10859
 
-## Quick Checklist
+## Website Features Summary
 
-- [ ] Files uploaded to `public_html` directory
-- [ ] Domain zsx.ai points to your hosting
-- [ ] SSL certificate installed (https)
-- [ ] Email contact@zsx.ai created
-- [ ] Contact form tested and verified
-- [ ] Flight photos uploaded to images folder
-- [ ] Website tested on desktop and mobile
-- [ ] All links and navigation working
+**✅ Implemented Features:**
+- Single-page responsive website with smooth scrolling navigation
+- Aviation-themed color palette (blues with warm orange accents)
+- ZSX Aviation branding with clickable logo (zsx_logo.png)
+- Hero section with background video (areo-1.mp4, 95% coverage, 8px blur)
+- About section with 3 feature cards
+- Services section with 4 training offerings
+- Gallery carousel with 4 flight photos, auto-advance every 5 seconds
+- Contact form with name, email, phone, interest fields
+- FormSubmit.co integration for email handling
+- Custom thank you page with auto-redirect
+- Content protection (disabled right-click, text selection, image dragging)
+- Copyright watermark on gallery images
+- Mobile-responsive design
 
-Your website should now be live at **https://zsx.ai**!
+**Quick Deployment Checklist:**
+- [x] GitHub repository created: ZSX-LLC/zsx-aviation-web
+- [x] GitHub Pages enabled
+- [x] Custom domain zsx.ai configured
+- [x] DNS records pointing to GitHub Pages
+- [x] SSL certificate active (https)
+- [x] Contact form verified with FormSubmit
+- [x] All images and video uploaded
+- [x] Website live and tested
+
+Your website is live at **https://zsx.ai**!
+
+To update: Make changes locally → `git add .` → `git commit -m "message"` → `git push` → Wait 1-2 minutes
