@@ -348,27 +348,10 @@ function toggleServiceCard(card) {
         // Collapse any other expanded cards first
         closeAllServiceCards();
 
-        // Expand this card
+        // Expand this card immediately
         card.classList.add('expanded');
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
-
-        // Scroll to center the expanded card in viewport
-        // Use setTimeout to allow the CSS transition to start first
-        setTimeout(() => {
-            // The card is now positioned fixed at center, but we need to ensure
-            // the viewport is scrolled appropriately
-            const cardRect = card.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-
-            // If card is taller than viewport, scroll to show the top
-            if (cardRect.height > viewportHeight * 0.85) {
-                window.scrollTo({
-                    top: window.scrollY + cardRect.top - (viewportHeight * 0.075),
-                    behavior: 'smooth'
-                });
-            }
-        }, 50);
 
         // Update click hint text
         const clickHint = card.querySelector('.click-hint');
