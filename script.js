@@ -311,11 +311,98 @@ const observer = new IntersectionObserver(function(entries) {
 
 // Observe elements for fade-in animation
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.about-card, .service-item');
+    const animatedElements = document.querySelectorAll('.about-card, .service-card');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+
+    // Create overlay element for service cards
+    const overlay = document.createElement('div');
+    overlay.className = 'service-overlay';
+    overlay.onclick = closeAllServiceCards;
+    document.body.appendChild(overlay);
+});
+
+// ========================================
+// Service Card Expand/Collapse Functionality
+// ========================================
+function toggleServiceCard(card) {
+    const overlay = document.querySelector('.service-overlay');
+    const isExpanded = card.classList.contains('expanded');
+
+    if (isExpanded) {
+        // Collapse this card
+        card.classList.remove('expanded');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+
+        // Update click hint text
+        const clickHint = card.querySelector('.click-hint');
+        if (clickHint) {
+            clickHint.textContent = clickHint.textContent.replace('Click to close', 'Click for FAA requirements').replace('Click to close', 'Click for details');
+        }
+    } else {
+        // Collapse any other expanded cards first
+        closeAllServiceCards();
+
+        // Expand this card
+        card.classList.add('expanded');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Scroll to center the expanded card in viewport
+        // Use setTimeout to allow the CSS transition to start first
+        setTimeout(() => {
+            // The card is now positioned fixed at center, but we need to ensure
+            // the viewport is scrolled appropriately
+            const cardRect = card.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+
+            // If card is taller than viewport, scroll to show the top
+            if (cardRect.height > viewportHeight * 0.85) {
+                window.scrollTo({
+                    top: window.scrollY + cardRect.top - (viewportHeight * 0.075),
+                    behavior: 'smooth'
+                });
+            }
+        }, 50);
+
+        // Update click hint text
+        const clickHint = card.querySelector('.click-hint');
+        if (clickHint) {
+            clickHint.textContent = 'Click to close';
+        }
+    }
+}
+
+function closeAllServiceCards() {
+    const expandedCards = document.querySelectorAll('.service-card.expanded');
+    const overlay = document.querySelector('.service-overlay');
+
+    expandedCards.forEach(card => {
+        card.classList.remove('expanded');
+
+        // Reset click hint text
+        const clickHint = card.querySelector('.click-hint');
+        if (clickHint) {
+            if (clickHint.textContent.includes('close')) {
+                clickHint.textContent = clickHint.textContent.includes('details')
+                    ? 'Click for details'
+                    : 'Click for FAA requirements';
+            }
+        }
+    });
+
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Close expanded card on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeAllServiceCards();
+    }
 });

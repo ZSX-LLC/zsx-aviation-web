@@ -286,22 +286,117 @@
     <section class="services">
         <div class="container">
             <h2 class="section-title">Training Services</h2>
+            <p class="services-intro">Click each service to view FAA requirements and details</p>
             <div class="services-grid">
-                <div class="service-item">
-                    <h3>Private Pilot License</h3>
-                    <p>Begin your aviation journey with comprehensive private pilot training</p>
-                </div>
-                <div class="service-item">
-                    <h3>Instrument Rating</h3>
-                    <p>Advance your skills and fly with confidence in all weather conditions</p>
-                </div>
-                <div class="service-item">
-                    <h3>Flight Reviews</h3>
-                    <p>Stay current and sharp with biennial flight reviews</p>
-                </div>
-                <div class="service-item">
+                <!-- Discovery Flights -->
+                <div class="service-card" onclick="toggleServiceCard(this)">
+                    <div class="service-icon">🌟</div>
                     <h3>Discovery Flights</h3>
-                    <p>Experience the thrill of flying with an introductory lesson</p>
+                    <p class="service-description">Experience the thrill of flying with an introductory lesson</p>
+                    <div class="service-requirements">
+                        <p><strong>Requirements:</strong> None!</p>
+                        <p><strong>Age:</strong> Any age (minors with parent consent)</p>
+                        <p><strong>Medical:</strong> Not required for introductory flights</p>
+                        <p><strong>Experience:</strong> No prior experience needed</p>
+                        <p><strong>Duration:</strong> Typically 30-60 minutes</p>
+                        <p><strong>What to Expect:</strong> Hands-on flight experience with instruction</p>
+                    </div>
+                    <span class="click-hint">Click for details</span>
+                </div>
+
+                <!-- Private Pilot License -->
+                <div class="service-card" onclick="toggleServiceCard(this)">
+                    <div class="service-icon">✈️</div>
+                    <h3>Private Pilot License</h3>
+                    <p class="service-description">Begin your aviation journey with comprehensive private pilot training</p>
+                    <div class="service-requirements">
+                        <p><strong>Age:</strong> 16 for solo, 17 for certificate</p>
+                        <p><strong>Flight Hours:</strong> Minimum 40 hours (average ~75 hours)</p>
+                        <p><strong>Medical:</strong> 3rd Class (or BasicMed)</p>
+                        <p><strong>Knowledge:</strong> Pass written exam</p>
+                        <p><strong>Practical:</strong> Pass checkride with examiner</p>
+                    </div>
+                    <span class="click-hint">Click for FAA requirements</span>
+                </div>
+
+                <!-- Instrument Rating -->
+                <div class="service-card" onclick="toggleServiceCard(this)">
+                    <div class="service-icon">🛫</div>
+                    <h3>Instrument Rating</h3>
+                    <p class="service-description">Advance your skills and fly with confidence in all weather conditions</p>
+                    <div class="service-requirements">
+                        <p><strong>Prerequisite:</strong> Private Pilot Certificate</p>
+                        <p><strong>Instrument Time:</strong> 40 hours actual or simulated</p>
+                        <p><strong>Instrument Training:</strong> 15 hours with CFII</p>
+                        <p><strong>Medical:</strong> 3rd Class minimum</p>
+                        <p><strong>Knowledge:</strong> Pass instrument written exam</p>
+                        <p><strong>Practical:</strong> Pass instrument checkride</p>
+                    </div>
+                    <span class="click-hint">Click for FAA requirements</span>
+                </div>
+
+                <!-- Commercial Pilot -->
+                <div class="service-card" onclick="toggleServiceCard(this)">
+                    <div class="service-icon">💼</div>
+                    <h3>Commercial Pilot</h3>
+                    <p class="service-description">Take your flying to a professional level with commercial pilot training</p>
+                    <div class="service-requirements">
+                        <p><strong>Age:</strong> 18 years minimum</p>
+                        <p><strong>Total Hours:</strong> 250 hours minimum</p>
+                        <p><strong>Prerequisite:</strong> Private Pilot Certificate</p>
+                        <p><strong>Medical:</strong> 2nd Class</p>
+                        <p><strong>Knowledge:</strong> Pass commercial written exam</p>
+                        <p><strong>Practical:</strong> Pass commercial checkride</p>
+                    </div>
+                    <span class="click-hint">Click for FAA requirements</span>
+                </div>
+
+                <!-- CFI -->
+                <div class="service-card" onclick="toggleServiceCard(this)">
+                    <div class="service-icon">👨‍🏫</div>
+                    <h3>CFI (Certified Flight Instructor)</h3>
+                    <p class="service-description">Become a flight instructor and share your passion for aviation</p>
+                    <div class="service-requirements">
+                        <p><strong>Prerequisite:</strong> Commercial or ATP Certificate</p>
+                        <p><strong>Instrument:</strong> Instrument rating required (for airplane)</p>
+                        <p><strong>Training:</strong> Ground and flight instructor training</p>
+                        <p><strong>Spin Training:</strong> Required for airplane category</p>
+                        <p><strong>Knowledge:</strong> FOI + CFI written exams</p>
+                        <p><strong>Practical:</strong> Pass CFI checkride</p>
+                    </div>
+                    <span class="click-hint">Click for FAA requirements</span>
+                </div>
+
+                <!-- CFII -->
+                <div class="service-card" onclick="toggleServiceCard(this)">
+                    <div class="service-icon">🎓</div>
+                    <h3>CFII (Instrument Instructor)</h3>
+                    <p class="service-description">Train to teach instrument flying and advance your instructor credentials</p>
+                    <div class="service-requirements">
+                        <p><strong>Prerequisite:</strong> CFI Certificate</p>
+                        <p><strong>Instrument Rating:</strong> Must hold instrument rating</p>
+                        <p><strong>Training:</strong> Instrument instructor training</p>
+                        <p><strong>Knowledge:</strong> CFII written exam</p>
+                        <p><strong>Practical:</strong> Pass CFII checkride</p>
+                        <p><strong>Privileges:</strong> Teach instrument rating students</p>
+                    </div>
+                    <span class="click-hint">Click for FAA requirements</span>
+                </div>
+
+                <!-- Flight Reviews -->
+                <div class="service-card" onclick="toggleServiceCard(this)">
+                    <div class="service-icon">📋</div>
+                    <h3>Flight Reviews</h3>
+                    <p class="service-description">Stay current and sharp with biennial flight reviews</p>
+                    <div class="service-requirements">
+                        <p><strong>Frequency:</strong> Every 24 calendar months</p>
+                        <p><strong>Ground Training:</strong> 1 hour minimum</p>
+                        <p><strong>Flight Training:</strong> 1 hour minimum</p>
+                        <p><strong>Coverage:</strong> Per 14 CFR § 61.56</p>
+                        <p><strong>Alternative:</strong> WINGS Program completion</p>
+                        <p><strong>Who:</strong> Required for all pilots acting as PIC</p>
+                    </div>
+                    <span class="click-hint">Click for FAA requirements</span>
                 </div>
             </div>
         </div>
