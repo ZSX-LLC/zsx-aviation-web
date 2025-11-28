@@ -294,6 +294,68 @@ img, video {
 }
 
 /* ========================================
+   Location & Contact Info Section
+   ======================================== */
+.location-info {
+    padding: var(--section-padding);
+    background: var(--light-blue);
+}
+
+.location-content {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.location-card-horizontal {
+    background: var(--white);
+    padding: 40px 50px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    max-width: 900px;
+    width: 100%;
+    transition: all 0.3s ease;
+    border: 2px solid var(--sky-blue);
+    box-shadow: 0 5px 20px rgba(0, 119, 190, 0.15);
+}
+
+.location-card-horizontal:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 119, 190, 0.25);
+}
+
+.location-icon {
+    font-size: 64px;
+    flex-shrink: 0;
+}
+
+.location-text {
+    flex-grow: 1;
+}
+
+.location-text h3 {
+    color: var(--deep-blue);
+    font-size: 26px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.location-text p {
+    color: var(--text-dark);
+    line-height: 1.8;
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+.location-details {
+    margin-top: 15px;
+    color: var(--text-light);
+    font-size: 15px;
+}
+
+/* ========================================
    Services Section
    ======================================== */
 .services {
@@ -330,6 +392,141 @@ img, video {
 
 .service-item p {
     color: var(--text-light);
+}
+
+/* ========================================
+   Fleet Section
+   ======================================== */
+.fleet {
+    padding: var(--section-padding);
+    background: var(--white);
+}
+
+.fleet-intro {
+    text-align: center;
+    color: var(--text-light);
+    margin-top: -30px;
+    margin-bottom: 40px;
+    font-size: 18px;
+}
+
+.fleet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+    perspective: 1000px;
+}
+
+/* Flip Card Container */
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 450px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    top: 0;
+    left: 0;
+}
+
+/* Front of Card - Image */
+.flip-card-front {
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.flip-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.aircraft-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 61, 92, 0.95));
+    color: var(--white);
+    padding: 40px 20px 20px;
+}
+
+.aircraft-overlay h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.aircraft-overlay p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Back of Card - Details */
+.flip-card-back {
+    background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sky-blue) 100%);
+    color: var(--white);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.flip-card-back h3 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--white);
+}
+
+.aircraft-details {
+    text-align: left;
+    width: 100%;
+}
+
+.aircraft-details p {
+    margin: 12px 0;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.aircraft-details strong {
+    color: var(--accent-orange);
+    font-weight: 600;
+}
+
+.aircraft-description {
+    margin-top: 20px !important;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    font-style: italic;
+    opacity: 0.95;
 }
 
 /* ========================================
@@ -627,6 +824,20 @@ img, video {
     .slider-btn {
         padding: 10px 15px;
         font-size: 18px;
+    }
+
+    .location-card-horizontal {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+    }
+
+    .location-icon {
+        font-size: 48px;
+    }
+
+    .flip-card {
+        height: 400px;
     }
 }
 
