@@ -207,10 +207,10 @@ img, video {
 }
 
 .hero-credit {
-    font-size: 16px;
+    font-size: 20px;
     margin-bottom: 30px;
-    font-weight: 400;
-    opacity: 0.9;
+    font-weight: 500;
+    opacity: 0.95;
 }
 
 .cta-button {
