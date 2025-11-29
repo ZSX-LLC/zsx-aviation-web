@@ -201,9 +201,16 @@ img, video {
 
 .hero-subtitle {
     font-size: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     font-weight: 300;
     opacity: 0.95;
+}
+
+.hero-credit {
+    font-size: 16px;
+    margin-bottom: 30px;
+    font-weight: 400;
+    opacity: 0.9;
 }
 
 .cta-button {
