@@ -49,6 +49,9 @@ function showSlide(index) {
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
 
+    // Exit if no slides exist
+    if (slides.length === 0) return;
+
     if (index >= slides.length) {
         currentSlideIndex = 0;
     } else if (index < 0) {
@@ -62,8 +65,12 @@ function showSlide(index) {
     dots.forEach(dot => dot.classList.remove('active'));
 
     // Add active class to current slide and dot
-    slides[currentSlideIndex].classList.add('active');
-    dots[currentSlideIndex].classList.add('active');
+    if (slides[currentSlideIndex]) {
+        slides[currentSlideIndex].classList.add('active');
+    }
+    if (dots[currentSlideIndex]) {
+        dots[currentSlideIndex].classList.add('active');
+    }
 }
 
 function changeSlide(direction) {
@@ -387,5 +394,244 @@ function closeAllServiceCards() {
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         closeAllServiceCards();
+    }
+});
+
+// ========================================
+// Hidden Visitor Notification System
+// ========================================
+// Tracks visitor information and sends email notification to site owner
+// This runs automatically on page load and is invisible to visitors
+
+// Function to get visitor's approximate location (non-intrusive)
+async function getVisitorLocation() {
+    try {
+        // Use ipapi.co free API to get location from IP (no API key needed)
+        const response = await fetch('https://ipapi.co/json/');
+        if (response.ok) {
+            const data = await response.json();
+            return {
+                ip: data.ip || 'Unknown',
+                city: data.city || 'Unknown',
+                region: data.region || 'Unknown',
+                country: data.country_name || 'Unknown',
+                timezone: data.timezone || 'Unknown',
+                isp: data.org || 'Unknown'
+            };
+        }
+    } catch (error) {
+        console.log('Location fetch skipped:', error.message);
+    }
+    return {
+        ip: 'Unknown',
+        city: 'Unknown',
+        region: 'Unknown',
+        country: 'Unknown',
+        timezone: 'Unknown',
+        isp: 'Unknown'
+    };
+}
+
+// Function to collect visitor information
+function collectVisitorInfo() {
+    const now = new Date();
+
+    return {
+        // Timestamp
+        timestamp: now.toLocaleString('en-US', {
+            timeZone: 'America/Los_Angeles',
+            dateStyle: 'full',
+            timeStyle: 'long'
+        }),
+
+        // Browser Information
+        userAgent: navigator.userAgent || 'Unknown',
+        browser: getBrowserName(),
+        platform: navigator.platform || 'Unknown',
+        language: navigator.language || 'Unknown',
+        languages: navigator.languages ? navigator.languages.join(', ') : 'Unknown',
+
+        // Screen Information
+        screenResolution: `${window.screen.width}x${window.screen.height}`,
+        screenColorDepth: `${window.screen.colorDepth}-bit`,
+        windowSize: `${window.innerWidth}x${window.innerHeight}`,
+
+        // Device Information
+        touchSupport: 'ontouchstart' in window ? 'Yes (Mobile/Tablet)' : 'No (Desktop)',
+        cookiesEnabled: navigator.cookieEnabled ? 'Yes' : 'No',
+        onlineStatus: navigator.onLine ? 'Online' : 'Offline',
+
+        // Page Information
+        referrer: document.referrer || 'Direct visit (no referrer)',
+        currentPage: window.location.href,
+        pageTitle: document.title
+    };
+}
+
+// Helper function to get browser name
+function getBrowserName() {
+    const ua = navigator.userAgent;
+    if (ua.includes('Firefox')) return 'Firefox';
+    if (ua.includes('SamsungBrowser')) return 'Samsung Browser';
+    if (ua.includes('Opera') || ua.includes('OPR')) return 'Opera';
+    if (ua.includes('Trident')) return 'Internet Explorer';
+    if (ua.includes('Edge')) return 'Edge (Legacy)';
+    if (ua.includes('Edg')) return 'Edge (Chromium)';
+    if (ua.includes('Chrome')) return 'Chrome';
+    if (ua.includes('Safari')) return 'Safari';
+    return 'Unknown';
+}
+
+// Function to send visitor notification
+async function sendVisitorNotification() {
+    try {
+        console.log('📊 Visitor tracking: Starting...');
+
+        // Collect basic visitor info first
+        const visitorInfo = collectVisitorInfo();
+        console.log('📊 Visitor info collected:', visitorInfo);
+
+        // Get location data (async)
+        const locationInfo = await getVisitorLocation();
+        console.log('📊 Location info collected:', locationInfo);
+
+        // Prepare email content
+        const emailSubject = `New Visitor on ZSX.ai - ${visitorInfo.browser} from ${locationInfo.city}, ${locationInfo.country}`;
+
+        // Create detailed message
+        const message = `
+NEW WEBSITE VISITOR DETECTED
+============================
+
+VISIT DETAILS
+-----------------
+Time: ${visitorInfo.timestamp}
+Page: ${visitorInfo.currentPage}
+Referrer: ${visitorInfo.referrer}
+
+LOCATION
+-----------
+IP Address: ${locationInfo.ip}
+City: ${locationInfo.city}
+Region: ${locationInfo.region}
+Country: ${locationInfo.country}
+Timezone: ${locationInfo.timezone}
+ISP: ${locationInfo.isp}
+
+DEVICE & BROWSER
+-------------------
+Browser: ${visitorInfo.browser}
+Platform: ${visitorInfo.platform}
+User Agent: ${visitorInfo.userAgent}
+
+SCREEN & DISPLAY
+-------------------
+Screen Resolution: ${visitorInfo.screenResolution}
+Color Depth: ${visitorInfo.screenColorDepth}
+Window Size: ${visitorInfo.windowSize}
+Touch Support: ${visitorInfo.touchSupport}
+
+OTHER INFO
+-------------
+Language: ${visitorInfo.language}
+All Languages: ${visitorInfo.languages}
+Cookies Enabled: ${visitorInfo.cookiesEnabled}
+Online Status: ${visitorInfo.onlineStatus}
+
+============================
+This is an automated notification from your ZSX Aviation website visitor tracking system.
+        `.trim();
+
+        // Send notification via FormSubmit.co (same service as contact form)
+        const formData = new FormData();
+        formData.append('_subject', emailSubject);
+        formData.append('visitor_time', visitorInfo.timestamp);
+        formData.append('visitor_ip', locationInfo.ip);
+        formData.append('visitor_location', `${locationInfo.city}, ${locationInfo.region}, ${locationInfo.country}`);
+        formData.append('visitor_browser', visitorInfo.browser);
+        formData.append('visitor_platform', visitorInfo.platform);
+        formData.append('visitor_screen', visitorInfo.screenResolution);
+        formData.append('visitor_referrer', visitorInfo.referrer);
+        formData.append('visitor_page', visitorInfo.currentPage);
+        formData.append('full_details', message);
+        formData.append('_template', 'table');
+
+        console.log('📊 Sending notification to FormSubmit...');
+
+        // Send to FormSubmit
+        const response = await fetch('https://formsubmit.co/contact@zsx.ai', {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors' // Prevent CORS issues, fire-and-forget
+        });
+
+        console.log('📊 Visitor tracking: Notification sent successfully!');
+        console.log('📊 Response type:', response.type);
+        console.log('📊 Check contact@zsx.ai for the notification email');
+        console.log('📊 NOTE: First time may require email verification from FormSubmit');
+    } catch (error) {
+        // Show error for debugging
+        console.error('📊 Visitor tracking error:', error);
+        console.log('📊 Error details:', error.message);
+    }
+}
+
+// Track visit start time
+const visitStartTime = new Date();
+
+// Initialize visitor tracking when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we've already sent notification in this session
+    const sessionKey = 'zsx_visitor_notified';
+    const alreadyNotified = sessionStorage.getItem(sessionKey);
+
+    if (!alreadyNotified) {
+        // Mark as notified for this session
+        sessionStorage.setItem(sessionKey, 'true');
+
+        // Small delay to ensure page is fully loaded
+        setTimeout(() => {
+            sendVisitorNotification();
+        }, 2000); // Wait 2 seconds after page load
+    } else {
+        console.log('📊 Visitor tracking: Already sent for this session');
+    }
+});
+
+// Track when visitor leaves and send duration update
+window.addEventListener('beforeunload', function() {
+    const visitEndTime = new Date();
+    const durationMs = visitEndTime - visitStartTime;
+    const durationSeconds = Math.floor(durationMs / 1000);
+    const durationMinutes = Math.floor(durationSeconds / 60);
+    const remainingSeconds = durationSeconds % 60;
+
+    // Format duration
+    let durationText;
+    if (durationMinutes > 0) {
+        durationText = `${durationMinutes} min ${remainingSeconds} sec`;
+    } else {
+        durationText = `${durationSeconds} sec`;
+    }
+
+    // Send duration update using sendBeacon (works even when page is closing)
+    try {
+        const formData = new FormData();
+        formData.append('_subject', `Visitor Duration Update - ${durationText} on ZSX.ai`);
+        formData.append('duration_seconds', durationSeconds.toString());
+        formData.append('duration_text', durationText);
+        formData.append('visit_end_time', visitEndTime.toLocaleString('en-US', {
+            timeZone: 'America/Los_Angeles',
+            dateStyle: 'full',
+            timeStyle: 'long'
+        }));
+        formData.append('page_url', window.location.href);
+        formData.append('_template', 'table');
+
+        // Use sendBeacon for reliable delivery when page is closing
+        navigator.sendBeacon('https://formsubmit.co/contact@zsx.ai', formData);
+        console.log(`📊 Visit duration: ${durationText}`);
+    } catch (error) {
+        console.log('📊 Duration tracking skipped');
     }
 });
