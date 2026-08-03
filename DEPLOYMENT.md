@@ -7,9 +7,9 @@ Your website is currently deployed using **GitHub Pages** - a free hosting servi
 ### Repository Information
 - **Repository**: https://github.com/ZSX-LLC/zsx-aviation-web
 - **Branch**: main
-- **Custom Domain**: zsx.ai
+- **Custom Domain**: flightlevel610.com (previously zsx.ai, switched August 2026)
 - **Hosting**: GitHub Pages (Free)
-- **Live Site**: https://zsx.ai
+- **Live Site**: https://flightlevel610.com
 
 ---
 
@@ -17,7 +17,7 @@ Your website is currently deployed using **GitHub Pages** - a free hosting servi
 
 ### Prerequisites
 - GitHub account (ZSX-LLC organization)
-- Domain zsx.ai configured in GoDaddy
+- Domain flightlevel610.com configured in GoDaddy
 - Git installed on your computer
 
 ### Initial Setup (Already Completed)
@@ -45,10 +45,10 @@ git push -u origin main
 5. Click **Save**
 
 #### 4. Configure Custom Domain
-Created `CNAME` file with content: `zsx.ai`
+Created `CNAME` file with content: `flightlevel610.com`
 
 #### 5. Configure GoDaddy DNS Settings
-In GoDaddy DNS management for zsx.ai, set up:
+In GoDaddy DNS management for flightlevel610.com, set up:
 
 **A Records (4 records pointing to GitHub Pages):**
 | Type | Name | Value | TTL |
@@ -91,7 +91,7 @@ The contact form uses **FormSubmit.co** for email handling with the following se
 
 **Current Settings (in `index.html`):**
 - **Recipient**: contact@zsx.ai
-- **Thank You Page**: https://zsx.ai/thank-you.html (custom page on your domain)
+- **Thank You Page**: https://flightlevel610.com/thank-you.html (custom page on your domain)
 - **Autoresponse**: Enabled - users receive confirmation email after submission
 - **Form Mode**: Native HTML form submission (in `script.js` line 124: `USE_NATIVE_FORM = true`)
 
@@ -131,7 +131,7 @@ Then open http://localhost:8000 in your browser to test changes before deploying
 
 **DNS Issues:**
 - Verify DNS records in GoDaddy match exactly as shown above
-- Use `dig zsx.ai` or https://dnschecker.org to verify DNS propagation
+- Use `dig flightlevel610.com` or https://dnschecker.org to verify DNS propagation
 
 **Gallery Images Not Showing:**
 - Verify images are committed: `git ls-files images/`
@@ -153,7 +153,7 @@ Then open http://localhost:8000 in your browser to test changes before deploying
 
 ## Prerequisites
 - GoDaddy account with hosting plan (requires purchase)
-- Domain zsx.ai configured in GoDaddy
+- Domain flightlevel610.com configured in GoDaddy
 - FTP credentials from GoDaddy
 
 ## Files to Upload
@@ -219,7 +219,7 @@ zsx-cfi/
    - In GoDaddy dashboard, go to Web Hosting
    - Click "Manage" → "Settings" → "FTP/SFTP"
    - Note down:
-     - FTP Host (usually ftp.zsx.ai or your server IP)
+     - FTP Host (usually ftp.flightlevel610.com or your server IP)
      - Username
      - Password
      - Port (usually 21)
@@ -253,19 +253,19 @@ If you want a simpler solution without FTP:
 2. **Or Use GoDaddy's Quick Install**
    - Upload files via the web interface as described in Option 1
 
-## Setting Up Your Domain (zsx.ai)
+## Setting Up Your Domain (flightlevel610.com)
 
 1. **Point Domain to Hosting**
    - In GoDaddy, go to "My Products" → "Domains"
-   - Click on zsx.ai → "Manage DNS"
+   - Click on flightlevel610.com → "Manage DNS"
    - Ensure the A record points to your hosting IP
    - This should be automatically configured if hosting and domain are both on GoDaddy
 
 2. **SSL Certificate (HTTPS)**
    - In your hosting dashboard
    - Go to "SSL Certificates"
-   - Install a free SSL certificate for zsx.ai
-   - This makes your site secure (https://zsx.ai)
+   - Install a free SSL certificate for flightlevel610.com
+   - This makes your site secure (https://flightlevel610.com)
 
 ## Contact Form Setup (FormSubmit.co)
 
@@ -273,7 +273,7 @@ The contact form uses FormSubmit.co as a free email service.
 
 **Current Configuration:**
 - **Email recipient**: contact@zsx.ai
-- **Thank you redirect**: https://zsx.ai/thank-you.html (custom page with 15s auto-redirect)
+- **Thank you redirect**: https://flightlevel610.com/thank-you.html (custom page with 15s auto-redirect)
 - **Autoresponse**: Enabled (users receive confirmation email)
 - **Status**: ✅ Already verified and working
 
@@ -292,7 +292,7 @@ The contact form uses FormSubmit.co as a free email service.
 
 After deployment:
 
-1. **Visit your site**: https://zsx.ai
+1. **Visit your site**: https://flightlevel610.com
 2. **Test all features**:
    - Navigation links (smooth scrolling)
    - Photo gallery (sliding carousel)
@@ -355,13 +355,13 @@ After deployment, you can customize:
 **Quick Deployment Checklist:**
 - [x] GitHub repository created: ZSX-LLC/zsx-aviation-web
 - [x] GitHub Pages enabled
-- [x] Custom domain zsx.ai configured
+- [x] Custom domain flightlevel610.com configured
 - [x] DNS records pointing to GitHub Pages
 - [x] SSL certificate active (https)
 - [x] Contact form verified with FormSubmit
 - [x] All images and video uploaded
 - [x] Website live and tested
 
-Your website is live at **https://zsx.ai**!
+Your website is live at **https://flightlevel610.com**!
 
 To update: Make changes locally → `git add .` → `git commit -m "message"` → `git push` → Wait 1-2 minutes

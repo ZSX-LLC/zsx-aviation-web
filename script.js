@@ -496,7 +496,7 @@ async function sendVisitorNotification() {
         console.log('📊 Location info collected:', locationInfo);
 
         // Prepare email content
-        const emailSubject = `New Visitor on ZSX.ai - ${visitorInfo.browser} from ${locationInfo.city}, ${locationInfo.country}`;
+        const emailSubject = `New Visitor on FlightLevel610.com - ${visitorInfo.browser} from ${locationInfo.city}, ${locationInfo.country}`;
 
         // Create detailed message
         const message = `
@@ -617,7 +617,7 @@ window.addEventListener('beforeunload', function() {
     // Send duration update using sendBeacon (works even when page is closing)
     try {
         const formData = new FormData();
-        formData.append('_subject', `Visitor Duration Update - ${durationText} on ZSX.ai`);
+        formData.append('_subject', `Visitor Duration Update - ${durationText} on FlightLevel610.com`);
         formData.append('duration_seconds', durationSeconds.toString());
         formData.append('duration_text', durationText);
         formData.append('visit_end_time', visitEndTime.toLocaleString('en-US', {
