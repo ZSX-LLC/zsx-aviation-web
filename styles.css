@@ -695,7 +695,7 @@ img, video {
 }
 
 .slide::after {
-    content: '© ZSX Aviation';
+    content: '© FlightLevel610';
     position: absolute;
     bottom: 60px;
     right: 20px;

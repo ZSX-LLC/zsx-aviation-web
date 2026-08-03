@@ -1,4 +1,4 @@
-# Deploying Your ZSX Aviation Website
+# Deploying Your FlightLevel610 Website
 
 ## ✅ Current Deployment Method: GitHub Pages (FREE)
 
@@ -24,10 +24,10 @@ Your website is currently deployed using **GitHub Pages** - a free hosting servi
 
 #### 1. Create Git Repository
 ```bash
-cd /path/to/zsx-cfi
+cd /path/to/flightlevel610-website
 git init
 git add index.html styles.css script.js DEPLOYMENT.md logo/ images/ videos/ thank-you.html
-git commit -m "Initial commit: ZSX Aviation website"
+git commit -m "Initial commit: FlightLevel610 website"
 ```
 
 #### 2. Connect to GitHub
@@ -71,7 +71,7 @@ To update your website content:
 
 ```bash
 # Navigate to your project directory
-cd /path/to/zsx-cfi
+cd /path/to/flightlevel610-website
 
 # Make your changes to files (index.html, styles.css, etc.)
 
@@ -90,7 +90,7 @@ GitHub Pages will automatically rebuild and deploy your site within 1-2 minutes.
 The contact form uses **FormSubmit.co** for email handling with the following setup:
 
 **Current Settings (in `index.html`):**
-- **Recipient**: contact@zsx.ai
+- **Recipient**: FlightLevel610@zsx.ai
 - **Thank You Page**: https://flightlevel610.com/thank-you.html (custom page on your domain)
 - **Autoresponse**: Enabled - users receive confirmation email after submission
 - **Form Mode**: Native HTML form submission (in `script.js` line 124: `USE_NATIVE_FORM = true`)
@@ -99,13 +99,13 @@ The contact form uses **FormSubmit.co** for email handling with the following se
 - Users see loading state ("Sending...") when submitting
 - After submission, redirects to custom thank you page with reminder to check junk folder
 - Users receive autoresponse email: "Thank you for your inquiry! Your message has been sent to our admin office. We will contact you soon."
-- Form data sent to contact@zsx.ai in table format
+- Form data sent to FlightLevel610@zsx.ai in table format
 
 ### Local Development and Testing
 
 **Running a Local Server:**
 ```bash
-cd /path/to/zsx-cfi
+cd /path/to/flightlevel610-website
 python3 -m http.server 8000
 ```
 Then open http://localhost:8000 in your browser to test changes before deploying.
@@ -160,14 +160,14 @@ Then open http://localhost:8000 in your browser to test changes before deploying
 
 Your website consists of these files:
 ```
-zsx-cfi/
+flightlevel610-website/
 ├── index.html          (Main webpage)
 ├── thank-you.html      (Post-submission thank you page)
 ├── styles.css          (Styling and colors)
 ├── script.js           (Interactive features)
 ├── DEPLOYMENT.md       (This file)
 ├── logo/               (Company logo)
-│   └── zsx_logo.png
+│   └── flightlevel610_logo.png
 ├── images/             (Flight photos - 4 images)
 │   ├── flight1.jpg
 │   ├── flight2.jpg
@@ -234,7 +234,7 @@ zsx-cfi/
    - Click "Quickconnect"
 
 4. **Upload Files**
-   - On the left side: Navigate to your local `zsx-cfi` folder
+   - On the left side: Navigate to your local `flightlevel610-website` folder
    - On the right side: Navigate to `public_html` folder
    - Drag and drop all files from left to right:
      - index.html
@@ -272,14 +272,14 @@ If you want a simpler solution without FTP:
 The contact form uses FormSubmit.co as a free email service.
 
 **Current Configuration:**
-- **Email recipient**: contact@zsx.ai
+- **Email recipient**: FlightLevel610@zsx.ai
 - **Thank you redirect**: https://flightlevel610.com/thank-you.html (custom page with 15s auto-redirect)
 - **Autoresponse**: Enabled (users receive confirmation email)
-- **Status**: ✅ Already verified and working
+- **Status**: ⚠️ Pending re-verification — recipient changed to FlightLevel610@zsx.ai (August 2026); FormSubmit must verify the new address before submissions are delivered
 
 **Setup Steps (Already Completed):**
-1. Form configured in `index.html` with action="https://formsubmit.co/contact@zsx.ai"
-2. Verification email sent to contact@zsx.ai and confirmed
+1. Form configured in `index.html` with action="https://formsubmit.co/FlightLevel610@zsx.ai"
+2. Verification email will be sent to FlightLevel610@zsx.ai on first submission — click the link in it to activate delivery (previous address contact@zsx.ai was verified; verification does not carry over)
 3. Custom thank you page created at thank-you.html
 4. Autoresponse message configured
 
@@ -302,7 +302,7 @@ After deployment:
 3. **Common Issues**:
    - If photos don't show: Check that images are in `public_html/images/` folder
    - If CSS doesn't load: Check file names match exactly (styles.css)
-   - If contact form fails: Check that contact@zsx.ai email exists
+   - If contact form fails: Check that FlightLevel610@zsx.ai email exists
 
 ## Adding Your Photos
 
@@ -340,7 +340,7 @@ After deployment, you can customize:
 **✅ Implemented Features:**
 - Single-page responsive website with smooth scrolling navigation
 - Aviation-themed color palette (blues with warm orange accents)
-- ZSX Aviation branding with clickable logo (zsx_logo.png)
+- FlightLevel610 branding with clickable logo (flightlevel610_logo.png)
 - Hero section with background video (areo-1.mp4, 95% coverage, 8px blur)
 - About section with 3 feature cards
 - Services section with 4 training offerings

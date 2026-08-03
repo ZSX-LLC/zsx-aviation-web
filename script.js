@@ -169,7 +169,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     if (TESTING_MODE) {
         console.log('=== CONTACT FORM TEST ===');
         console.log('Form Data:', formData);
-        console.log('Would send to: contact@zsx.ai');
+        console.log('Would send to: FlightLevel610@zsx.ai');
         console.log('========================');
 
         // Show success message
@@ -204,11 +204,11 @@ document.getElementById('contactForm').addEventListener('submit', async function
         );
 
         console.log('=== FORM SUBMISSION DEBUG ===');
-        console.log('Attempting to send to: contact@zsx.ai');
+        console.log('Attempting to send to: FlightLevel610@zsx.ai');
         console.log('Form data:', formData);
 
         // Try to send via FormSubmit.co (free form backend service)
-        const response = await fetch('https://formsubmit.co/contact@zsx.ai', {
+        const response = await fetch('https://formsubmit.co/FlightLevel610@zsx.ai', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -242,7 +242,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
                 responseData = JSON.parse(responseText);
                 console.log('Parsed JSON:', responseData);
 
-                formMessage.innerHTML = `<strong>✓ Success!</strong><br>Your message has been sent to contact@zsx.ai`;
+                formMessage.innerHTML = `<strong>✓ Success!</strong><br>Your message has been sent to FlightLevel610@zsx.ai`;
                 formMessage.className = 'form-message success';
                 this.reset();
             } catch (jsonError) {
@@ -250,7 +250,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
                 console.log('Not JSON - HTML verification page detected');
 
                 formMessage.innerHTML = `<strong>✓ Email Verification Required!</strong><br>
-                    FormSubmit sent a verification email to <strong>contact@zsx.ai</strong><br>
+                    FormSubmit sent a verification email to <strong>FlightLevel610@zsx.ai</strong><br>
                     Please check your inbox and click the verification link.<br>
                     After verification, the form will work automatically.`;
                 formMessage.className = 'form-message success';
@@ -273,7 +273,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
         console.error('Form submission exception:', error);
 
         formMessage.innerHTML = `<strong>⚠ Error</strong><br>${error.message}<br>
-            Please email directly: <a href="mailto:contact@zsx.ai" style="color: white; text-decoration: underline;">contact@zsx.ai</a>`;
+            Please email directly: <a href="mailto:FlightLevel610@zsx.ai" style="color: white; text-decoration: underline;">FlightLevel610@zsx.ai</a>`;
         formMessage.className = 'form-message error';
     } finally {
         // Re-enable submit button
@@ -539,7 +539,7 @@ Cookies Enabled: ${visitorInfo.cookiesEnabled}
 Online Status: ${visitorInfo.onlineStatus}
 
 ============================
-This is an automated notification from your ZSX Aviation website visitor tracking system.
+This is an automated notification from your FlightLevel610 website visitor tracking system.
         `.trim();
 
         // Send notification via FormSubmit.co (same service as contact form)
@@ -559,7 +559,7 @@ This is an automated notification from your ZSX Aviation website visitor trackin
         console.log('📊 Sending notification to FormSubmit...');
 
         // Send to FormSubmit
-        const response = await fetch('https://formsubmit.co/contact@zsx.ai', {
+        const response = await fetch('https://formsubmit.co/FlightLevel610@zsx.ai', {
             method: 'POST',
             body: formData,
             mode: 'no-cors' // Prevent CORS issues, fire-and-forget
@@ -567,7 +567,7 @@ This is an automated notification from your ZSX Aviation website visitor trackin
 
         console.log('📊 Visitor tracking: Notification sent successfully!');
         console.log('📊 Response type:', response.type);
-        console.log('📊 Check contact@zsx.ai for the notification email');
+        console.log('📊 Check FlightLevel610@zsx.ai for the notification email');
         console.log('📊 NOTE: First time may require email verification from FormSubmit');
     } catch (error) {
         // Show error for debugging
@@ -582,7 +582,7 @@ const visitStartTime = new Date();
 // Initialize visitor tracking when page loads
 document.addEventListener('DOMContentLoaded', function() {
     // Check if we've already sent notification in this session
-    const sessionKey = 'zsx_visitor_notified';
+    const sessionKey = 'flightlevel610_visitor_notified';
     const alreadyNotified = sessionStorage.getItem(sessionKey);
 
     if (!alreadyNotified) {
@@ -629,7 +629,7 @@ window.addEventListener('beforeunload', function() {
         formData.append('_template', 'table');
 
         // Use sendBeacon for reliable delivery when page is closing
-        navigator.sendBeacon('https://formsubmit.co/contact@zsx.ai', formData);
+        navigator.sendBeacon('https://formsubmit.co/FlightLevel610@zsx.ai', formData);
         console.log(`📊 Visit duration: ${durationText}`);
     } catch (error) {
         console.log('📊 Duration tracking skipped');
